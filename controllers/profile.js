@@ -1,6 +1,15 @@
 const User = require('../models/User')
 const errorHandler = require('../utils/errorHandler')
 
+module.exports.getById = async function(req, res) {
+    try {
+        const user = await User.findById(req.params.id)
+        res.status(200).json(user)
+    } catch (e) {
+        errorHandler(res, e)
+    }
+}
+
 module.exports.update = async function(req, res) {
     const updated = {
         name: req.body.name,
